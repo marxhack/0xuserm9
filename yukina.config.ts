@@ -35,8 +35,8 @@ const YukinaConfig: Configuration = {
   avatarUrl: "https://s2.loli.net/2025/01/25/FPpTrQSezM8ivbl.webp",
   socialLinks: [
     {
-      icon: "line-md:github-loop",
-      link: "https://github.com/WhitePaper233",
+      icon: "line-md:twitter-x",
+      link: "https://x.com/MaroineYoucefi",
     },
     {
       icon: "mingcute:bilibili-line",
