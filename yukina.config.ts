@@ -43,8 +43,8 @@ const YukinaConfig: Configuration = {
       link: "https://x.com/MaroineYoucefi",
     },
     {
-      icon: "mingcute:netease-music-line",
-      link: "https://music.163.com/#/user/home?id=125291648",
+      icon: "line-md:email",
+      link: "maroineyoucefi@gmail.com",
     },
   ],
   maxSidebarCategoryChip: 6, // It is recommended to set it to a common multiple of 2 and 3
@@ -53,7 +53,7 @@ const YukinaConfig: Configuration = {
   maxFooterTagChip: 24,
 
   banners: [
-    "https://s2.loli.net/2025/01/25/PBvHFjr5yDu6t4a.webp",
+    "https://images.unsplash.com/photo-1649451844897-8699a1d6d96d?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     "https://s2.loli.net/2025/01/25/6bKcwHZigzlM4mJ.webp",
     "https://s2.loli.net/2025/01/25/H9WgEK6qNTcpFiS.webp",
     "https://s2.loli.net/2025/01/25/njNVtuUMzxs81RI.webp",
