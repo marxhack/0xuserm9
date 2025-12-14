@@ -69,7 +69,7 @@ const YukinaConfig: Configuration = {
   },
 
   // WIP functions
-  bannerStyle: "HIDDEN", // 'loop' | 'static' | 'hidden'
+  bannerStyle: "LOOP", // 'loop' | 'static' | 'hidden'
 };
 
 export default YukinaConfig;
