@@ -54,6 +54,7 @@ const YukinaConfig: Configuration = {
 
   banners: [
     "https://interoperable-europe.ec.europa.eu/sites/default/files/styles/wysiwyg_full_width/public/inline-images/BugBounty.png?itok=Z322FJ3w",
+    "https://cpri.uci.edu/wp-content/uploads/ctf-1024x602.jpg",
     "https://www.tripwire.com/sites/default/files/CTF.jpg",
     "https://cdn.nulab.com/learn-wp/app/uploads/2019/05/14210442/Nulab-Capture-the-Flag-CTF-Challenge-Blog.png",
     "https://ctftime.org/media/cache/eb/47/eb47a9046e2125339a21f474e2bf44ba.png",
