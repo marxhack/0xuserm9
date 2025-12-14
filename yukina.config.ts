@@ -32,7 +32,7 @@ const YukinaConfig: Configuration = {
 
   username: "Merouane Youcefi",
   sign: "Hi There!",
-  avatarUrl: "https://tryhackme-images.s3.amazonaws.com/user-avatars/50e0fe999350a57c6cfa5cf559fa649e.jpg",
+  avatarUrl: "https://pin.it/4g8n3TtHh",
   socialLinks: [
     {
       icon: "line-md:linkedin",
