@@ -3,13 +3,12 @@ import type { Configuration } from "./src/types/config";
 
 const YukinaConfig: Configuration = {
   title: "0xuserm9",
-  subTitle: "Merouane Youcefi Demo Blog",
+  subTitle: "Merouane Youcefi Demo Site",
   brandTitle: "0xuserm9",
 
   description: "Demo Blog",
 
   site: "https://0xuserm9.vercel.app",
-
   locale: "en", // set for website language and date format
 
   navigators: [
