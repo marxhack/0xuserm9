@@ -55,7 +55,7 @@ const YukinaConfig: Configuration = {
   banners: [
     "https://images.unsplash.com/photo-1649451844897-8699a1d6d96d?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     "https://www.tripwire.com/sites/default/files/CTF.jpg",
-    "https://s2.loli.net/2025/01/25/H9WgEK6qNTcpFiS.webp",
+    "https://cdn.nulab.com/learn-wp/app/uploads/2019/05/14210442/Nulab-Capture-the-Flag-CTF-Challenge-Blog.png",
     "https://s2.loli.net/2025/01/25/njNVtuUMzxs81RI.webp",
     "https://s2.loli.net/2025/01/25/tozsJ8QHAjFN3Mm.webp",
     "https://s2.loli.net/2025/01/25/Pm89OveZq7NWUxF.webp",
