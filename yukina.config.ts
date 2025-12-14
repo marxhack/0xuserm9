@@ -35,12 +35,12 @@ const YukinaConfig: Configuration = {
   avatarUrl: "https://s2.loli.net/2025/01/25/FPpTrQSezM8ivbl.webp",
   socialLinks: [
     {
-      icon: "line-md:twitter-x",
-      link: "https://x.com/MaroineYoucefi",
+      icon: "line-md:linkedin",
+      link: "https://www.linkedin.com/in/merouane-youcefi-44b44a284/",
     },
     {
-      icon: "mingcute:bilibili-line",
-      link: "https://space.bilibili.com/22433608",
+      icon: "line-md:twitter-x",
+      link: "https://x.com/MaroineYoucefi",
     },
     {
       icon: "mingcute:netease-music-line",
