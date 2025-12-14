@@ -55,11 +55,7 @@ const YukinaConfig: Configuration = {
   banners: [
     "https://www.tripwire.com/sites/default/files/CTF.jpg",
     "https://cdn.nulab.com/learn-wp/app/uploads/2019/05/14210442/Nulab-Capture-the-Flag-CTF-Challenge-Blog.png",
-    "https://s2.loli.net/2025/01/25/njNVtuUMzxs81RI.webp",
-    "https://s2.loli.net/2025/01/25/tozsJ8QHAjFN3Mm.webp",
-    "https://s2.loli.net/2025/01/25/Pm89OveZq7NWUxF.webp",
-    "https://s2.loli.net/2025/01/25/UCYKvc1ZhgPHB9m.webp",
-    "https://s2.loli.net/2025/01/25/JjpLOW8VSmufzlA.webp",
+    "https://interoperable-europe.ec.europa.eu/sites/default/files/styles/wysiwyg_full_width/public/inline-images/BugBounty.png?itok=Z322FJ3w",
   ],
 
   slugMode: "HASH", // 'RAW' | 'HASH'
