@@ -60,9 +60,9 @@
 }
 
 :root {
-  --os-handle-bg-custom: rgba(220, 38, 38, 0.5);
-  --os-handle-bg-custom-hover: rgba(220, 38, 38, 0.8);
-  --os-handle-bg-custom-active: rgba(185, 28, 28, 1);
+  --os-handle-bg-custom: rgba(0, 0, 0, 0.3);
+  --os-handle-bg-custom-hover: rgba(0, 0, 0, 0.5);
+  --os-handle-bg-custom-active: rgba(0, 0, 0, 0.6);
 }
 
 :root.dark {
