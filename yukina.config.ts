@@ -2,11 +2,11 @@ import I18nKeys from "./src/locales/keys";
 import type { Configuration } from "./src/types/config";
 
 const YukinaConfig: Configuration = {
-  title: "Yukina",
-  subTitle: "Yukina Template Demo Site",
-  brandTitle: "Yukina",
+  title: "0xuserm9",
+  subTitle: "Merouane Youcefi Demo Blog",
+  brandTitle: "0xuserm9",
 
-  description: "Demo Site",
+  description: "Demo Blog",
 
   site: "https://0xuserm9.vercel.app",
 
