@@ -32,7 +32,7 @@ const YukinaConfig: Configuration = {
 
   username: "Merouane Youcefi",
   sign: "Hi There!",
-  avatarUrl: "https://pin.it/4g8n3TtHh",
+  avatarUrl: "https://i.pinimg.com/1200x/33/6f/b7/336fb7aa53941f2c4e9dd1c5f3708e00.jpg",
   socialLinks: [
     {
       icon: "line-md:linkedin",
