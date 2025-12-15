@@ -38,14 +38,16 @@ The challenge presents us with a minimalistic web interface:
 ```
 ---
 
-## Step 2 — Identify the Running User
+## Step 1: Testing for Path Traversal
 
-From `/etc/passwd`:
+My first instinct is to test for Local File Inclusion (LFI). I tried a classic payload:
 
+![Challenge Homepage](https://0xuserm9.vercel.app/images/nex/2.PNG)
+
+**Bingo!** The server happily returned `/etc/passwd`, revealing the application runs as a node user:
 ```
 node:x:1000:1000::/home/node:/bin/sh
 ```
-
 This confirms:
 - Backend runs as `node`
 - Application is likely **Node.js**
