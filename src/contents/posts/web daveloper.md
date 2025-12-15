@@ -173,11 +173,12 @@ Directory structure:
 ### First Try: Direct Access to Private Directory
 Based on this structure, my first attempt was logical:
 
-1. I knew from the code that:
+- I knew from the code that:
   - BASE = "`/app/data`"
   - PRIVATE_DIR = "`/app/data/vault`"
-2. So `flag.txt` should be at the private directory: `/app/data/vault/flag.txt`
-3. Since I had LFI, I tried: ```http
+- So `flag.txt` should be at the private directory: `/app/data/vault/flag.txt`
+- Since I had LFI, I tried: 
+```http
 GET /../../../app/data/vault/flag.txt
 ```
 
