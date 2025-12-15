@@ -222,7 +222,7 @@ if (method === "GET") {
 - Missing the `startsWith(PRIVATE_DIR)` check!
 - Allows bypassing the `403 restriction`
 
-### 🏴‍☠️ The Successful Exploit:
+### The Successful Exploit:
 **I could use the header to access it:**
 
 ![Challenge Homepage](https://0xuserm9.vercel.app/images/nex/challenge.PNG)
