@@ -172,16 +172,16 @@ Directory structure:
 
 ### First Try: Direct Access to Private Directory
 Based on this structure, my first attempt was logical:
-```js
-// I knew from the code that:
-// BASE = "/app/data"
-// PRIVATE_DIR = "/app/data/vault"
 
-// So flag.txt should be at: /app/data/vault/flag.txt
+- I knew from the code that:
+  - BASE = "/app/data"
+  - PRIVATE_DIR = "/app/data/vault"
 
-// Since I had LFI, I tried:
-// /../../../app/data/vault/flag.txt
-```
+- So flag.txt should be at the private directory: /app/data/vault/flag.txt
+
+- Since I had LFI, I tried:
+ /../../../app/data/vault/flag.txt
+
 
 
 ```js
