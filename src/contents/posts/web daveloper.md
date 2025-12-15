@@ -182,18 +182,8 @@ Based on this structure, my first attempt was logical:
 - Since I had LFI, I tried:
  /../../../app/data/vault/flag.txt
 
+![](https://0xuserm9.vercel.app/images/nex/3.PNG)
 
-
-```js
-const overrideUrl = req.header("X-Original-URL");
-
-if (overrideUrl) {
-  const realTarget = path.join(BASE, overrideUrl);
-  if (fs.existsSync(realTarget) && fs.lstatSync(realTarget).isFile()) {
-    return res.send(fs.readFileSync(realTarget, "utf8"));
-  }
-}
-```
 
 ### Vulnerability
 - No validation against `PRIVATE_DIR`
