@@ -69,18 +69,11 @@ at /app/server.js:114:28
 
 ---
 
-## Step 4 — Application Path Leak
+## Step 3: Source Code Disclosure
 
-Trying to read `/proc/self/cwd` caused an error, leaking a stack trace:
+With the path known, direct source code access was trivial:
 
-```
-Error: EISDIR: illegal operation on a directory, read
-at /app/server.js:114:28
-```
-
-From this we learn:
-- Application directory: `/app`
-- Main file: `/app/server.js`
+![Challenge Homepage](https://0xuserm9.vercel.app/images/nex/4.PNG)
 
 ---
 
