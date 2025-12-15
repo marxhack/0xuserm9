@@ -157,29 +157,22 @@ Important code found:
 ```js
 const BASE = path.join(__dirname, "data");
 const PUBLIC_DIR = path.join(BASE, "public");
-const PRIVATE_DIR = path.join(BASE, "vault"); // private dir
+const PRIVATE_DIR = path.join(BASE, "vault"); 
 ```
 
 Directory structure:
 
-```js
+```
 /app/data/public
-/app/data/vault => private
+/app/data/vault 
 ```
-
-Access to the vault is blocked:
-
-```js
-if (target.startsWith(PRIVATE_DIR)) {
-  return res.status(403).send("Forbidden");
-}
-```
-
 ---
 
-## Step 6 — Logic Flaw (Trusted Header Abuse)
+## Step 6 — My Initial Access Attempt
 
-Another code path:
+First Try: Direct Access to Private Directory
+=============
+
 
 ```js
 const overrideUrl = req.header("X-Original-URL");
