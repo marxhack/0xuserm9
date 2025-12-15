@@ -18,7 +18,7 @@ i am just a web daveloper, using copilot and chatgbt to create challenges :
 i dont know where is flag.txt , can u find it for me !!!
 NOTE: brute forcing is not allowed, you'll be blocked immediatly
 Connection Info : http://ctf.nexus-security.club:3555/
-Author: 0xsila X dhia
+>Author: 0xsila X dhia
 ![Challenge Homepage](https://0xuserm9.vercel.app/images/nex/1.PNG)
 
 ---
