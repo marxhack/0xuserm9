@@ -4,7 +4,7 @@ import type { Configuration } from "./src/types/config";
 const YukinaConfig: Configuration = {
   title: "0xuserm9",
   subTitle: "Merouane Youcefi Demo Blog",
-  brandTitle: "0xuserm9",
+  brandTitle: "",
 
   description: "Demo Blog",
 
