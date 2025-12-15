@@ -1,6 +1,6 @@
 ---
 title: "NexHunt: Writeup for Web/Web-Daveloper"
-published: 2025-12-13
+published: 2025-12-16
 description: A detailed walkthrough of a web CTF challenge involving LFI
 tags: [CTF, Web Security, LFI]
 category: Writeups
@@ -184,8 +184,8 @@ GET /../../../app/data/vault/flag.txt
 
 ![Challenge Homepage](https://0xuserm9.vercel.app/images/nex/3.PNG)
 
-### Understanding Why 403 Happened
-Looking at the code, the normal request flow has this check:
+### Understanding Why 403 Happened:
+Looking at the code, the normal request flow has this check (LINE 55):
 ```js
 if (target.startsWith(PRIVATE_DIR)) return res.status(403).send("Forbidden");
 ```
@@ -195,11 +195,11 @@ When I made my request:
 3. target.startsWith(PRIVATE_DIR) = true 
 4. Result: `403 Forbidden` 
 
-**The security check was working!**
-direct access to anything in `/app/data/vault/`.
+> The security check was working!
+
 ---
 
-## Step 7 — Finding the Bypass & Retrieve the Flag
+## Step 7 — Finding the Bypass & Retrieve the Flag:
 
 **While analyzing the code, I discovered a second way to access files:**
 ```js
@@ -223,9 +223,12 @@ if (method === "GET") {
 - Allows bypassing the `403 restriction`
 
 ### The Successful Exploit:
-**I could use the header to access it:**
+I could use the header to access it:
 
 ![Challenge Homepage](https://0xuserm9.vercel.app/images/nex/challenge.PNG)
+
+**THE FLOW:**
+![Challenge Homepage](https://0xuserm9.vercel.app/images/nex/deepseek_mermaid_20251215_0c7db3.png)
 
 **The Flag: `nexus{w3bd4v_wchw3y4_h3d34rs_eezzzzzzzzz}`**
 
@@ -238,4 +241,4 @@ if (method === "GET") {
 - Security checks must be consistent
 
 ---
-Happy hacking 🏴‍☠️
+Happy Hacking 🏴‍☠️
