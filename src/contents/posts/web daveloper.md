@@ -184,6 +184,17 @@ Based on this structure, my first attempt was logical:
 
 ![](https://0xuserm9.vercel.app/images/nex/3.PNG)
 
+### Understanding Why 403 Happened
+Looking at the code, the normal request flow has this check:
+```
+if (target.startsWith(PRIVATE_DIR)) return res.status(403).send("Forbidden");
+```
+When I made my request:
+1. target = /app/data/vault/flag.txt (after path.join)
+2. PRIVATE_DIR = /app/data/vault
+3. target.startsWith(PRIVATE_DIR) = true ✅
+4. Result: 403 Forbidden ✅
+
 
 ### Vulnerability
 - No validation against `PRIVATE_DIR`
