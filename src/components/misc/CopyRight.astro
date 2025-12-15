@@ -54,42 +54,6 @@ const { title, published, license, author, sourceLink } = Astro.props;
           {formatDate(published, YukinaConfig.locale)}
         </p>
       </div>
-      <div class="flex flex-col">
-        <span class="select-none text-sm text-[var(--text-color-lighten)]"
-          >{i18n(I18nKeys.copy_right_license)}</span
-        >
-        <!-- with special license -->
-        {
-          license && license.url && (
-            <a
-              class="line-clamp-1 text-sm text-[var(--text-color)] lg:text-base"
-              href={license.url}
-              target="_blank"
-            >
-              {license.name}
-            </a>
-          )
-        }
-        {
-          license && !license.url && (
-            <p class="!my-0 line-clamp-1 text-sm text-[var(--text-color)] lg:text-base">
-              {license.name}
-            </p>
-          )
-        }
-        <!-- without special license -->
-        {
-          !license && (
-            <a
-              class="line-clamp-1 text-sm text-[var(--text-color)] lg:text-base"
-              href={YukinaConfig.license.url}
-              target="_blank"
-            >
-              {YukinaConfig.license.name}
-            </a>
-          )
-        }
-      </div>
     </div>
   </div>
   <div
