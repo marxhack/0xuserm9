@@ -31,10 +31,20 @@ The challenge presents us with a minimalistic web interface:
 ![Challenge Homepage](https://0xuserm9.vercel.app/images/nex/challenged.PNG)
 
 
-```<!-- Source from the homepage -->
-<h1>Welcome to this easy CTF challenge <!--
-    bugbounty >>>>>>>>>>>>>>>>>> CTF
---></h1>
+```<html>
+    
+<body>
+    
+    <h1>Welcome to this easy CTF challenge <!--
+
+
+        bugbounty >>>>>>>>>>>>>>>>>> CTF
+    --></h1>
+
+</body>
+
+
+</html>
 ```
 ---
 
