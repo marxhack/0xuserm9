@@ -1,12 +1,10 @@
 ---
-title: CTF Writeup — I am just a web developer
+title: NexHunt Writeup for Web/Web-Daveloper
 published: 2025-12-13
-description: A detailed walkthrough of a web CTF challenge involving LFI, procfs abuse, source code disclosure, and a header-based logic flaw.
-tags: [CTF, Web Security, Node.js, LFI, Bug Bounty]
+description: A detailed walkthrough of a web CTF challenge involving LFI
+tags: [CTF, Web Security, LFI]
 category: Writeups
-licenseName: "Unlicensed"
-author: emn178
-draft: false
+author: 0xuserm9
 ---
 
 # CTF Writeup — *I am just a web developer*
