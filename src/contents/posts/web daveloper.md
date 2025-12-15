@@ -180,7 +180,7 @@ Based on this structure, my first attempt was logical:
 3. Since I had LFI, I tried:
  `/../../../app/data/vault/flag.txt`
 
-![](https://0xuserm9.vercel.app/images/nex/3.PNG)
+![gg](https://0xuserm9.vercel.app/images/nex/3.PNG)
 
 ### Understanding Why 403 Happened
 Looking at the code, the normal request flow has this check:
