@@ -173,14 +173,12 @@ Directory structure:
 ### First Try: Direct Access to Private Directory
 Based on this structure, my first attempt was logical:
 
-- I knew from the code that:
-  - BASE = "/app/data"
-  - PRIVATE_DIR = "/app/data/vault"
-
-- So flag.txt should be at the private directory: /app/data/vault/flag.txt
-
-- Since I had LFI, I tried:
- /../../../app/data/vault/flag.txt
+1. I knew from the code that:
+  - BASE = "`/app/data`"
+  - PRIVATE_DIR = "`/app/data/vault`"
+2. So `flag.txt` should be at the private directory: `/app/data/vault/flag.txt`
+3. Since I had LFI, I tried:
+ `/../../../app/data/vault/flag.txt`
 
 ![](https://0xuserm9.vercel.app/images/nex/3.PNG)
 
