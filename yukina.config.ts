@@ -2,7 +2,7 @@ import I18nKeys from "./src/locales/keys";
 import type { Configuration } from "./src/types/config";
 
 const YukinaConfig: Configuration = {
-  title: "0xuserm9",
+  title: "/n0xuserm9",
   subTitle: "Merouane Youcefi Demo Blog",
   brandTitle: "",
 
