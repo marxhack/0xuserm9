@@ -90,7 +90,7 @@ With the path known, direct source code access was trivial:
 
 ## Step 5 — Source Code Analysis
 
-```
+```js
 const express = require("express");
 const fs = require("fs");
 const path = require("path");
