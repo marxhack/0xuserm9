@@ -7,10 +7,18 @@ category: Writeups
 author: 0xuserm9
 ---
 
-# CTF Writeup — *I am just a web developer*
+# Challenge Overview
 
-This writeup explains how I solved a web challenge by chaining multiple vulnerabilities.  
-No brute force, only logic, source analysis, and careful exploitation.
+* CTF: NexHunt CTF 2025
+* Challenge: Web-Daveloper
+* Category: Web Exploitation
+* Points: 100 (28 solves)
+* Description: i am just a web daveloper, using copilot and chatgbt to create challenges :
+i dont know where is flag.txt , can u find it for me !!!
+NOTE: brute forcing is not allowed, you'll be blocked immediatly
+Connection Info : http://ctf.nexus-security.club:3555/
+Author: 0xsila X dhia
+![Alt text](marxhack/0xuserm9/public/images/nex/1.PNG)
 
 ---
 
