@@ -1,5 +1,5 @@
 ---
-title: NexHunt: Writeup for Web/Web-Daveloper
+title: "NexHunt: Writeup for Web/Web-Daveloper"
 published: 2025-12-13
 description: A detailed walkthrough of a web CTF challenge involving LFI
 tags: [CTF, Web Security, LFI]
