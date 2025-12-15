@@ -199,7 +199,7 @@ direct access to anything in `/app/data/vault/`.
 
 ## Step 7 — Finding the Bypass & Retrieve the Flag
 
-###### While analyzing the code, I discovered a second way to access files:
+**While analyzing the code, I discovered a second way to access files:**
 ```js
 if (method === "GET") {
     const overrideUrl = req.header("X-Original-URL");
