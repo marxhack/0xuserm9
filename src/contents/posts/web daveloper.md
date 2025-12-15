@@ -177,8 +177,9 @@ Based on this structure, my first attempt was logical:
   - BASE = "`/app/data`"
   - PRIVATE_DIR = "`/app/data/vault`"
 2. So `flag.txt` should be at the private directory: `/app/data/vault/flag.txt`
-3. Since I had LFI, I tried:
- `/../../../app/data/vault/flag.txt`
+3. Since I had LFI, I tried: ```http
+GET /../../../app/data/vault/flag.txt
+```
 
 ![Challenge Homepage](https://0xuserm9.vercel.app/images/nex/3.PNG)
 
