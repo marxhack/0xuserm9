@@ -170,8 +170,8 @@ Directory structure:
 
 ## Step 6 — My Initial Access Attempt
 
-First Try: Direct Access to Private Directory
-=============
+### First Try: Direct Access to Private Directory
+
 
 
 ```js
