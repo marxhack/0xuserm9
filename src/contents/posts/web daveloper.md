@@ -32,8 +32,7 @@ The challenge presents us with a minimalistic web interface:
 
 
 ```
-<html>
-    
+<html>   
 <body>
     
     <h1>Welcome to this easy CTF challenge <!--
@@ -41,10 +40,7 @@ The challenge presents us with a minimalistic web interface:
 
         bugbounty >>>>>>>>>>>>>>>>>> CTF
     --></h1>
-
 </body>
-
-
 </html>
 ```
 ---
