@@ -1,6 +1,6 @@
 ---
 title: "NexHunt: Writeup for Web/Web-Daveloper"
-published: 2025-12-16
+published: 2025-16-12
 description: A detailed walkthrough of a web CTF challenge involving LFI
 tags: [CTF, Web Security, LFI]
 category: Writeups
@@ -229,14 +229,6 @@ I could use the header to access it:
 ![Challenge Homepage](https://0xuserm9.vercel.app/images/nex/deepseek_mermaid_20251215_0c7db3.png)
 
 **The Flag: `nexus{w3bd4v_wchw3y4_h3d34rs_eezzzzzzzzz}`**
-
-## Lessons Learned
-
-- LFI is often only the entry point
-- `/proc` is powerful for reconnaissance
-- Stack traces leak sensitive paths
-- Never trust headers like `X-Original-URL`
-- Security checks must be consistent
 
 ---
 Happy Hacking 🏴‍☠️
