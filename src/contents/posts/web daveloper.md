@@ -225,7 +225,7 @@ if (method === "GET") {
 
 ![Challenge Homepage](https://0xuserm9.vercel.app/images/nex/challenge.PNG)
 
-#### The Flag: `nexus{w3bd4v_wchw3y4_h3d34rs_eezzzzzzzzz}`
+**The Flag: `nexus{w3bd4v_wchw3y4_h3d34rs_eezzzzzzzzz}`**
 
 ## Lessons Learned
 
