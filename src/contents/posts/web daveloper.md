@@ -88,13 +88,68 @@ With the path known, direct source code access was trivial:
 
 ---
 
-## Step 5 — Source Code Disclosure
+## Step 5 — Source Code Analysis
 
-Using LFI:
+```
+const express = require("express");
+const fs = require("fs");
+const path = require("path");
 
-```http
-GET /../../../app/server.js HTTP/1.1
-Host: target
+const app = express();
+app.use(express.text({ type: "*/*" }));
+
+// Base folder where you ALREADY created the files manually
+const BASE = path.join(__dirname, "data");
+
+// These folders MUST already exist
+const PUBLIC_DIR = path.join(BASE, "public");
+const PRIVATE_DIR = path.join(BASE, "vault"); // renamed to be less obvious
+
+// Main handler
+app.all("*", (req, res) => {
+
+    const override = req.header("X-HTTP-Method-Override");
+    const method = override ? override.toUpperCase() : req.method.toUpperCase();
+
+    const depth = req.header("Depth") || "0";
+    const urlPath = req.path === "/" ? "" : req.path;
+    const target = path.join(BASE, urlPath);
+
+    // ...
+
+    // ==========================
+    // BLOCK direct PROPFIND
+    // ==========================
+    if (req.method.toUpperCase() === "PROPFIND") {
+        return res.status(405).send("method not allowed , yaaaaa9999iiiiiiiiiiwwwwwwwww.");
+    }
+
+    // ==========================
+    //            GET
+    // ==========================
+    if (method === "GET") {
+        const overrideUrl = req.header("X-Original-URL");
+
+        if (overrideUrl) {
+            const realTarget = path.join(BASE, overrideUrl);
+            if (fs.existsSync(realTarget) && fs.lstatSync(realTarget).isFile()) {
+                return res.send(fs.readFileSync(realTarget, "utf8"));
+            }
+            return res.status(404).send("Not found");
+        }
+
+        if (urlPath === "" || urlPath === "/") {
+            const indexFile = path.join(PUBLIC_DIR, "index.html");
+            if (fs.existsSync(indexFile)) return res.send(fs.readFileSync(indexFile, "utf8"));
+            return res.status(404).send("Missing index.html");
+        }
+
+        if (!fs.existsSync(target)) return res.status(404).send("Not found");
+        if (target.startsWith(PRIVATE_DIR)) return res.status(403).send("Forbidden");
+        if (fs.lstatSync(target).isDirectory()) return res.status(400).send("Cannot GET directory");
+
+        // ...
+});
 ```
 
 Important code found:
