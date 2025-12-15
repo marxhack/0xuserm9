@@ -55,6 +55,10 @@ My first instinct is to test for Local File Inclusion (LFI). I tried a classic p
 ```
 node:x:1000:1000::/home/node:/bin/sh
 ```
+**Key Findings:**
+ - LFI vulnerability confirmed
+ - Application runs as node user
+ - Likely a Node.js application
 ---
 
 ## Step 2: Process Information Leakage
