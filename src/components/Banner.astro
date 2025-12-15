@@ -11,29 +11,21 @@ export interface Props {
 const { title, subTitle, bannerImage, slug } = Astro.props;
 
 const hasTitle = title !== undefined || subTitle !== undefined;
-const hasHeaderImg = bannerImage !== undefined || slug !== undefined;
 
-let carouselImgsList = YukinaConfig.banners;
+
+const carouselImgsList = [
+  "https://interoperable-europe.ec.europa.eu/sites/default/files/styles/wysiwyg_full_width/public/inline-images/BugBounty.png?itok=Z322FJ3w",
+  "https://www.tripwire.com/sites/default/files/CTF.jpg",
+];
 const carouselAnimationTime = `${carouselImgsList.length * 6}s`;
 ---
 
 <div id="banner" class="banner onload-animation-fade-in">
   <div class="transition-main banner-inner h-full w-full">
-    {
-      !hasHeaderImg && (
-        <div class="carousel">
-          <ul id="carousel_imgs">
-            {carouselImgsList.map((img, index) => (
-              <li
-                class="item lozad"
-                style={{ animationDelay: `${index * 6}s` }}
-                data-background-image={img}
-              />
-            ))}
           </ul>
         </div>
       )
-    }
+    
     {
       hasHeaderImg && (
         <div class="cover">
