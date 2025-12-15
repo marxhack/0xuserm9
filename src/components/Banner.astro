@@ -25,10 +25,12 @@ const carouselAnimationTime = "12s";
   <ul id="carousel_imgs">
     {carouselImgsList.map((img, index) => (
       <li
-        class="item"
-        style={{ animationDelay: `${index * 6}s` }}
-        style={`background-image:url(${img})`}
-      />
+  class="item"
+  style={`
+    animation-delay: ${index * 6}s;
+    background-image: url(${img});
+  `}
+/>
     ))}
   </ul>
 </div>
