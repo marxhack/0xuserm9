@@ -190,8 +190,8 @@ if (target.startsWith(PRIVATE_DIR)) return res.status(403).send("Forbidden");
 When I made my request:
 1. target = `/app/data/vault/flag.txt` (after path.join)
 2. PRIVATE_DIR = `/app/data/vault`
-3. target.startsWith(PRIVATE_DIR) = true ✅
-4. Result: `403 Forbidden` ✅
+3. target.startsWith(PRIVATE_DIR) = true 
+4. Result: `403 Forbidden` 
 
 ###### The security check was working! The server correctly blocked direct access to anything in `/app/data/vault/`.
 ---
@@ -199,6 +199,20 @@ When I made my request:
 ## Step 7 — Finding the Bypass & Retrieve the Flag
 
 ###### While analyzing the code, I discovered a second way to access files:
+```js
+if (method === "GET") {
+    const overrideUrl = req.header("X-Original-URL");
+
+    if (overrideUrl) {
+        const realTarget = path.join(BASE, overrideUrl);
+        if (fs.existsSync(realTarget) && fs.lstatSync(realTarget).isFile()) {
+            return res.send(fs.readFileSync(realTarget, "utf8"));
+        }
+        return res.status(404).send("Not found");
+    }
+    // ... rest of normal flow with security checks
+}
+```
 
 
 
