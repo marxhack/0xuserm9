@@ -157,14 +157,14 @@ Important code found:
 ```js
 const BASE = path.join(__dirname, "data");
 const PUBLIC_DIR = path.join(BASE, "public");
-const PRIVATE_DIR = path.join(BASE, "vault");
+const PRIVATE_DIR = path.join(BASE, "vault"); // private dir
 ```
 
 Directory structure:
 
-```
+```js
 /app/data/public
-/app/data/vault
+/app/data/vault => private
 ```
 
 Access to the vault is blocked:
