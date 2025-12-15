@@ -25,17 +25,17 @@ Connection Info : http://ctf.nexus-security.club:3555/
 
 ---
 
-## Step 1 — Local File Inclusion (LFI)
+## Initial Engagement
 
-Testing for path traversal:
+The challenge presents us with a minimalistic web interface:
+![Challenge Homepage](https://0xuserm9.vercel.app/images/nex/challenged.PNG)
 
-```http
-GET /../../../etc/passwd HTTP/1.1
-Host: target
+
+```<!-- Source from the homepage -->
+<h1>Welcome to this easy CTF challenge <!--
+    bugbounty >>>>>>>>>>>>>>>>>> CTF
+--></h1>
 ```
-
-The server returned `/etc/passwd`, confirming **LFI**.
-
 ---
 
 ## Step 2 — Identify the Running User
