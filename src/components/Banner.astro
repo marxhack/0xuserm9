@@ -12,7 +12,6 @@ const { title, subTitle, bannerImage, slug } = Astro.props;
 
 const hasTitle = title !== undefined || subTitle !== undefined;
 
-
 const carouselImgsList = [
   "https://interoperable-europe.ec.europa.eu/sites/default/files/styles/wysiwyg_full_width/public/inline-images/BugBounty.png?itok=Z322FJ3w",
   "https://www.tripwire.com/sites/default/files/CTF.jpg",
@@ -22,32 +21,17 @@ const carouselAnimationTime = `${carouselImgsList.length * 6}s`;
 
 <div id="banner" class="banner onload-animation-fade-in">
   <div class="transition-main banner-inner h-full w-full">
-    {
-  !hasHeaderImg && (
     <div class="carousel">
-      <ul id="carousel_imgs">
-        {carouselImgsList.map((img, index) => (
-          <li
-            class="item lozad"
-            style={{ animationDelay: `${index * 6}s` }}
-            data-background-image={img}
-          />
-        ))}
-      </ul>
-    </div>
-    )
-    }
-    {
-      hasHeaderImg && (
-        <div class="cover">
-          <img
-            class="item lozad"
-            data-src={bannerImage ?? GetCoverURLForUnspecifiedEntry(slug ?? "")}
-            alt="PostCoverr"
-          />
-        </div>
-      )
-    }
+  <ul id="carousel_imgs">
+    {carouselImgsList.map((img, index) => (
+      <li
+        class="item"
+        style={{ animationDelay: `${index * 6}s` }}
+        style={`background-image:url(${img})`}
+      />
+    ))}
+  </ul>
+</div>
     <div class="relative h-[95%] w-full">
       <div
         class="absolute left-1/2 top-1/2 w-4/5 -translate-x-1/2 -translate-y-1/2 lg:w-3/4"
