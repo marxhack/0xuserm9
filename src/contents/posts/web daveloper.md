@@ -186,26 +186,23 @@ Based on this structure, my first attempt was logical:
 
 ### Understanding Why 403 Happened
 Looking at the code, the normal request flow has this check:
-```
+```js
 if (target.startsWith(PRIVATE_DIR)) return res.status(403).send("Forbidden");
 ```
 When I made my request:
-1. target = /app/data/vault/flag.txt (after path.join)
-2. PRIVATE_DIR = /app/data/vault
+1. target = `/app/data/vault/flag.txt` (after path.join)
+2. PRIVATE_DIR = `/app/data/vault`
 3. target.startsWith(PRIVATE_DIR) = true ✅
-4. Result: 403 Forbidden ✅
+4. Result: `403 Forbidden` ✅
 
-
-### Vulnerability
-- No validation against `PRIVATE_DIR`
-- Blind trust in `X-Original-URL`
-- Security check is bypassed
-
+###### The security check was working! The server correctly blocked direct access to anything in `/app/data/vault/`.
 ---
 
-## Step 7 — Retrieve the Flag
+## Step 7 — Finding the Bypass & Retrieve the Flag
 
-By sending a safe path and abusing the header:
+###### While analyzing the code, I discovered a second way to access files:
+
+
 
 ```http
 GET / HTTP/1.1
