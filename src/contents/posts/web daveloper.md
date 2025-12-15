@@ -1,9 +1,9 @@
 ---
-title: NexHunt/WEB-DEVLOPER
+title: NexHunt / Web-Daveloper
 published: 2025-12-16
 description: A simple example of a Markdown blog post.
 tags: [Markdown, Blogging]
-category: Examples
+category: CTF
 draft: false
 ---
 
