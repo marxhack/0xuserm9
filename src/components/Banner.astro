@@ -22,10 +22,21 @@ const carouselAnimationTime = `${carouselImgsList.length * 6}s`;
 
 <div id="banner" class="banner onload-animation-fade-in">
   <div class="transition-main banner-inner h-full w-full">
-          </ul>
-        </div>
-      )
-    
+    {
+  !hasHeaderImg && (
+    <div class="carousel">
+      <ul id="carousel_imgs">
+        {carouselImgsList.map((img, index) => (
+          <li
+            class="item lozad"
+            style={{ animationDelay: `${index * 6}s` }}
+            data-background-image={img}
+          />
+        ))}
+      </ul>
+    </div>
+    )
+    }
     {
       hasHeaderImg && (
         <div class="cover">
