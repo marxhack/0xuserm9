@@ -22,14 +22,6 @@ Author: 0xsila X dhia
 
 ---
 
-## Challenge Description
-
-> *I am just a web developer, using Copilot and ChatGPT to create challenges :(  
-> I don't know where is flag.txt, can you find it for me !!!*  
-> **Note:** brute forcing is not allowed.
-
----
-
 ## Step 1 — Local File Inclusion (LFI)
 
 Testing for path traversal:
