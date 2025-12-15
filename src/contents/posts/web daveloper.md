@@ -31,13 +31,11 @@ The challenge presents us with a minimalistic web interface:
 ![Challenge Homepage](https://0xuserm9.vercel.app/images/nex/challenged.PNG)
 
 The source code (ctrl+U):
-```
+```js
 <html>   
 <body>
     
     <h1>Welcome to this easy CTF challenge <!--
-
-
         bugbounty >>>>>>>>>>>>>>>>>> CTF
     --></h1>
 </body>
