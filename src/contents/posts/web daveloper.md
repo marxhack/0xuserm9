@@ -30,7 +30,7 @@ Connection Info : http://ctf.nexus-security.club:3555/
 The challenge presents us with a minimalistic web interface:
 ![Challenge Homepage](https://0xuserm9.vercel.app/images/nex/challenged.PNG)
 
-The source code (F12):
+The source code (ctrl+U):
 ```
 <html>   
 <body>
