@@ -193,7 +193,8 @@ When I made my request:
 3. target.startsWith(PRIVATE_DIR) = true 
 4. Result: `403 Forbidden` 
 
-###### The security check was working! The server correctly blocked direct access to anything in `/app/data/vault/`.
+**The security check was working!**
+direct access to anything in `/app/data/vault/`.
 ---
 
 ## Step 7 — Finding the Bypass & Retrieve the Flag
