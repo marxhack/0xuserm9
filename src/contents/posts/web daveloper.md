@@ -58,10 +58,6 @@ GET /../../../proc/self/cwd HTTP/1.1
 ```
 ![Challenge Homepage](https://0xuserm9.vercel.app/images/nex/33.PNG)
 
-```http
-GET /../../../proc/self/cmdline HTTP/1.1
-Host: target
-```
 The error message was more valuable than success:
 ```
 Error: EISDIR: illegal operation on a directory, read
@@ -70,7 +66,7 @@ at /app/server.js:114:28
 **Key Intelligence Gathered:**
  - Application path: `/app`
  - Main file: `server.js`
- 
+
 ---
 
 ## Step 4 — Application Path Leak
