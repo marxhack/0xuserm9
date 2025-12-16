@@ -1,5 +1,5 @@
-# Special thanks to:
+# WHOAMI:
 
-- [Hexo Shoka theme](https://github.com/amehime/hexo-theme-shoka) for providing design inspiration
+Hi, I’m Merouane Youcefi. A medical student passionate about hacking, web security, and the quirks of tech. When I’m not in scrubs, I’m chasing bugs and cracking CTF challenges.
 
-- [Astro Fuwari template](https://github.com/saicaca/fuwari) for providing the main design concept and part of the implementation
+
