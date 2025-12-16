@@ -34,7 +34,6 @@ The source code (ctrl+U):
 ```js
 <html>   
 <body>
-    
     <h1>Welcome to this easy CTF challenge <!--
         bugbounty >>>>>>>>>>>>>>>>>> CTF
     --></h1>
