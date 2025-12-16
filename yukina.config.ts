@@ -53,7 +53,7 @@ const YukinaConfig: Configuration = {
   maxFooterTagChip: 24,
 
   banners: [
-    "https://interoperable-europe.ec.europa.eu/sites/default/files/styles/wysiwyg_full_width/public/inline-images/BugBounty.png?itok=Z322FJ3w",
+    "https://0xuserm9.vercel.app/images/nex/nex.webp,
     "https://www.tripwire.com/sites/default/files/CTF.jpg",
   ],
 
