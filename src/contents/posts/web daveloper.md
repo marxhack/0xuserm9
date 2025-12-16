@@ -86,7 +86,7 @@ With the path known, direct source code access was trivial:
 
 ---
 
-## Step 5 — Source Code Analysis
+## Step 4 — Source Code Analysis
 
 ```js
 const express = require("express");
@@ -166,7 +166,7 @@ Directory structure:
 ```
 ---
 
-## Step 6 — My Initial Access Attempt
+## Step 5 — My Initial Access Attempt
 
 ### First Try: Direct Access to Private Directory
 Based on this structure, my first attempt was logical:
@@ -197,7 +197,7 @@ When I made my request:
 
 ---
 
-## Step 7 — Finding the Bypass & Retrieve the Flag:
+## Step 6 — Finding the Bypass & Retrieve the Flag:
 
 **While analyzing the code, I discovered a second way to access files:**
 ```js
