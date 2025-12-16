@@ -6,7 +6,7 @@ const YukinaConfig: Configuration = {
   subTitle: "Welcome To My Blog",
   brandTitle: "",
 
-  description: "",
+  description: "Welcome To My Blog",
 
   site: "https://0xuserm9.vercel.app",
   locale: "en", // set for website language and date format
