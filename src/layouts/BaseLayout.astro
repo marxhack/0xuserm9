@@ -3,15 +3,18 @@ import YukinaConfig from "../../yukina.config";
 import BaseHead from "../components/BaseHead.astro";
 ---
 
-<!-- Inline script BEFORE html tag to ensure dark mode is applied instantly -->
-<script is:inline>
-  const saved = localStorage.getItem("theme") || "dark";
-  document.documentElement.setAttribute("data-theme", saved);
-</script>
-
 <html lang={YukinaConfig.locale}>
   <head>
     <BaseHead />
+
+    <!-- Immediately set dark mode to prevent FOUC -->
+    <script is:inline>
+      (function() {
+        const saved = localStorage.getItem('theme');
+        const theme = saved ? saved : 'dark';
+        document.documentElement.setAttribute('data-theme', theme);
+      })();
+    </script>
   </head>
 
   <body class="overflow-y-hidden">
