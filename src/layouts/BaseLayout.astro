@@ -3,7 +3,12 @@ import YukinaConfig from "../../yukina.config";
 import BaseHead from "../components/BaseHead.astro";
 ---
 
-<html lang={YukinaConfig.locale} data-theme="dark">
+<script>
+  const saved = localStorage.getItem("theme") || "dark";
+  document.documentElement.setAttribute("data-theme", saved);
+</script>
+
+<html lang={YukinaConfig.locale}>
   <BaseHead />
   <body class="overflow-y-hidden">
     <slot />
