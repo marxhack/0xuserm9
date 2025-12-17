@@ -9,7 +9,10 @@ import BaseHead from "../components/BaseHead.astro";
 </script>
 
 <html lang={YukinaConfig.locale}>
-  <BaseHead />
+  <head>
+    <BaseHead />
+  </head>
+
   <body class="overflow-y-hidden">
     <slot />
   </body>
