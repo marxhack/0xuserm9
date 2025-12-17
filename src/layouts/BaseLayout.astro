@@ -4,19 +4,7 @@ import BaseHead from "../components/BaseHead.astro";
 ---
 
 <html lang={YukinaConfig.locale}>
-  <head>
-    <BaseHead />
-
-    <!-- Immediately set dark mode to prevent FOUC -->
-    <script is:inline>
-      (function() {
-        const saved = localStorage.getItem('theme');
-        const theme = saved ? saved : 'dark';
-        document.documentElement.setAttribute('data-theme', theme);
-      })();
-    </script>
-  </head>
-
+  <BaseHead />
   <body class="overflow-y-hidden">
     <slot />
   </body>
