@@ -2,7 +2,7 @@
 title: "UTCTF: Writeup for Web/Break the Bank"
 published: 2026-03-15
 description: "JWE Misconfiguration: Breaking Authentication Through Public Key Leakage"
-tags: [CTF, Web Security, JWT]
+tags: [CTF, Web Security, JWE]
 category: Writeups
 author: 0xuserm9
 ---
