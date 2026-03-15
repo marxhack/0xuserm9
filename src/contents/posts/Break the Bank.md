@@ -26,7 +26,7 @@ The challenge gave me a URL to a fictional 1997-era banking website for First Na
 ## TL;DR
 The application leaked its JWE public key via a directory listing, allowing attackers to forge admin tokens by encrypting {"sub":"admin"} with the exposed key. The server mistakenly treated successful decryption as proof of authenticity.
 
-## Initial Engagement
+## Initial Reconnaissance
 
 The challenge presents us with a minimalistic web interface:
 ![Challenge Homepage](https://0xuserm9.vercel.app/images/nex/challenged.PNG)
@@ -43,46 +43,53 @@ The source code (ctrl+U):
 ```
 ---
 
-## Step 1: Testing for Path Traversal
+## Step 1: Mapping the Application
 
-My first instinct is to test for Local File Inclusion (LFI). I tried a classic payload:
+Navigating to the target revealed a retro banking interface with minimal functionality:
 
-![Challenge Homepage](https://0xuserm9.vercel.app/images/nex/2.PNG)
+* Static homepage with branding
+* Login page at /login.html
+* Profile page (post-authentication)
+* Admin section at /admin
 
-**Bingo!** The server happily returned `/etc/passwd`, revealing the application runs as a node user:
-```
-node:x:1000:1000::/home/node:/bin/sh
-```
-**Key Findings:**
- - LFI vulnerability confirmed
- - Application runs as node user
- - Likely a Node.js application
----
+![Challenge Homepage](https://0xuserm9.vercel.app/images/bankk/1.PNG)
 
-## Step 2: Process Information Leakage
 
-Linux's `/proc` filesystem is a goldmine for attackers. I tried accessing process information:
-```
-GET /../../../proc/self/cwd HTTP/1.1
-```
-![Challenge Homepage](https://0xuserm9.vercel.app/images/nex/33.PNG)
+## Step 2: Finding Test Credentials
 
-The error message was more valuable than success:
+The homepage contained a link to `/resources/FNSB_InternetBanking_Guide.pdf`. Extracting text from this PDF revealed:
+
+
 ```
-Error: EISDIR: illegal operation on a directory, read
-at /app/server.js:114:28
+Demo Access:
+Username: testuser
+Password: testpass123
 ```
-**Key Intelligence Gathered:**
- - Application path: `/app`
- - Main file: `server.js`
+These credentials proved crucial for understanding the authentication flow.
 
 ---
 
-## Step 3: Source Code Disclosure
+## Step 3: Authentication Analysis
+Logging in as `testuser` revealed:
+**Request:**
+```
+POST /login HTTP/1.1
+Content-Type: application/json
 
-With the path known, direct source code access was trivial:
+{"username":"testuser","password":"testpass123"}
+```
+**Response:**
+```
+HTTP/1.1 200 OK
+Set-Cookie: fnsb_token=eyJjdHkiOiJKV1QiLCJlbmMiOiJBMjU2R0NNIiwiYWxnIjoiUlNBLU9BRVAtMjU2In0.U5JzT4X... [truncated]
 
-![Challenge Homepage](https://0xuserm9.vercel.app/images/nex/4.PNG)
+{"token":"eyJjdHkiOiJKV1QiLCJlbmMiOiJBMjU2R0NNIiwiYWxnIjoiUlNBLU9BRVAtMjU2In0.U5JzT4X...","redirect":"/profile"}
+```
+The token format immediately suggested **JWE (JSON Web Encryption)** - a 5-part structure separated by dots:
+```
+BASE64URL(protected_header).BASE64URL(encrypted_key).BASE64URL(iv).BASE64URL(ciphertext).BASE64URL(tag)
+```
+
 
 ---
 
