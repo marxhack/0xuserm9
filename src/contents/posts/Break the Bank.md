@@ -61,14 +61,14 @@ These credentials proved crucial for understanding the authentication flow.
 Logging in as `testuser` revealed:
 
 **Request:**
-```js
+```json
 POST /login HTTP/1.1
 Content-Type: application/json
 
 {"username":"testuser","password":"testpass123"}
 ```
 **Response:**
-```js
+```json
 HTTP/1.1 200 OK
 Set-Cookie: fnsb_token=eyJjdHkiOiJKV1QiLCJlbmMiOiJBMjU2R0NNIiwiYWxnIjoiUlNBLU9BRVAtMjU2In0.U5JzT4X... [truncated]
 
@@ -80,7 +80,7 @@ BASE64URL(protected_header).BASE64URL(encrypted_key).BASE64URL(iv).BASE64URL(cip
 ```
 ## Token Analysis:
 
-```js
+```json
 {
   "cty": "JWT",
   "enc": "A256GCM",
