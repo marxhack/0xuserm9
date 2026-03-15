@@ -168,7 +168,7 @@ print(token)
 
 ### Use the Forged Token:
 
-```js
+```
 curl -s -H "Cookie: fnsb_token=$TOKEN" http://challenge.utctf.live:5926/admin
 ```
 The response contains the `admin` console and the **flag**:
