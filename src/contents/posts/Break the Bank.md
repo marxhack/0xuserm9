@@ -26,21 +26,6 @@ The challenge gave me a URL to a fictional 1997-era banking website for First Na
 ## TL;DR
 The application leaked its JWE public key via a directory listing, allowing attackers to forge admin tokens by encrypting {"sub":"admin"} with the exposed key. The server mistakenly treated successful decryption as proof of authenticity.
 
-## Initial Reconnaissance
-
-The challenge presents us with a minimalistic web interface:
-![Challenge Homepage](https://0xuserm9.vercel.app/images/nex/challenged.PNG)
-
-The source code (ctrl+U):
-```js
-<html>   
-<body>
-    <h1>Welcome to this easy CTF challenge <!--
-        bugbounty >>>>>>>>>>>>>>>>>> CTF
-    --></h1>
-</body>
-</html>
-```
 ---
 
 ## Step 1: Mapping the Application
@@ -93,7 +78,10 @@ BASE64URL(protected_header).BASE64URL(encrypted_key).BASE64URL(iv).BASE64URL(cip
 
 ---
 
-## Step 4 — Source Code Analysis
+## The Critical Discovery
+
+## Directory Listing Exposure
+
 
 ```js
 const express = require("express");
