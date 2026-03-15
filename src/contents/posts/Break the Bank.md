@@ -75,7 +75,7 @@ Set-Cookie: fnsb_token=eyJjdHkiOiJKV1QiLCJlbmMiOiJBMjU2R0NNIiwiYWxnIjoiUlNBLU9BR
 {"token":"eyJjdHkiOiJKV1QiLCJlbmMiOiJBMjU2R0NNIiwiYWxnIjoiUlNBLU9BRVAtMjU2In0.U5JzT4X...","redirect":"/profile"}
 ```
 The token format immediately suggested **JWE (JSON Web Encryption)** - a 5-part structure separated by dots:
-```
+```js
 BASE64URL(protected_header).BASE64URL(encrypted_key).BASE64URL(iv).BASE64URL(ciphertext).BASE64URL(tag)
 ```
 ## Token Analysis:
