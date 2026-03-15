@@ -78,7 +78,22 @@ The token format immediately suggested **JWE (JSON Web Encryption)** - a 5-part 
 ```
 BASE64URL(protected_header).BASE64URL(encrypted_key).BASE64URL(iv).BASE64URL(ciphertext).BASE64URL(tag)
 ```
+## Token Analysis:
 
+```
+{
+  "cty": "JWT",
+  "enc": "A256GCM",
+  "alg": "RSA-OAEP-256"
+}
+```
+This is not a standard JWT (which is usually signed). It’s a **JWE (JSON Web Encryption) token**. JWE is used to encrypt the payload, not to sign it.
+
+* `alg`: RSA-OAEP-256 – the key encryption algorithm. The server encrypts a random Content Encryption Key (CEK) with its RSA public key.
+
+* `enc`: A256GCM – the content encryption algorithm. The payload is encrypted with AES-256-GCM using the CEK.
+
+The crucial point: **RSA-OAEP** is an **asymmetric encryption scheme**. Anyone possessing the **public key can encrypt data** that only the holder of the private key can decrypt.
 
 ---
 
@@ -97,22 +112,6 @@ This error tells us two things:
 
 2. If we can forge a token with `"sub":"admin"`, we can bypass the restriction.
 
-## Token Analysis:
-
-```
-{
-  "cty": "JWT",
-  "enc": "A256GCM",
-  "alg": "RSA-OAEP-256"
-}
-```
-This is not a standard JWT (which is usually signed). It’s a **JWE (JSON Web Encryption) token**. JWE is used to encrypt the payload, not to sign it.
-
-* `alg`: RSA-OAEP-256 – the key encryption algorithm. The server encrypts a random Content Encryption Key (CEK) with its RSA public key.
-
-* `enc`: A256GCM – the content encryption algorithm. The payload is encrypted with AES-256-GCM using the CEK.
-
-The crucial point: **RSA-OAEP** is an **asymmetric encryption scheme**. Anyone possessing the **public key can encrypt data** that only the holder of the private key can decrypt.
 
 ## Directory Listing Exposure
 
