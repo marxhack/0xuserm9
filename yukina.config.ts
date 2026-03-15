@@ -54,6 +54,7 @@ const YukinaConfig: Configuration = {
 
   banners: [
     "https://0xuserm9.vercel.app/images/nex/nex.png",
+    "https://0xuserm9.vercel.app/images/bankk/UTCTF.png",
     "https://www.tripwire.com/sites/default/files/CTF.jpg",
   ],
 
