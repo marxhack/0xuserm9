@@ -31,7 +31,7 @@ The application leaked its JWE public key via a directory listing, allowing atta
 Navigating to the target revealed a retro banking interface with minimal functionality:
 
 * Static homepage with branding
-* Login page at /login.html
+* Login page at `/login.html`
 
 ![Challenge Homepage](https://0xuserm9.vercel.app/images/bankk/1.PNG)
 
