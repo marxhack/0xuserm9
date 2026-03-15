@@ -99,13 +99,13 @@ This error tells us two things:
 
 ## Token Analysis:
 
-``
+```
 {
   "cty": "JWT",
   "enc": "A256GCM",
   "alg": "RSA-OAEP-256"
 }
-``
+```
 This is not a standard JWT (which is usually signed). It’s a **JWE (JSON Web Encryption) token**. JWE is used to encrypt the payload, not to sign it.
 
 * `alg`: RSA-OAEP-256 – the key encryption algorithm. The server encrypts a random Content Encryption Key (CEK) with its RSA public key.
@@ -173,7 +173,7 @@ print(token)
 curl -s -H "Cookie: fnsb_token=$TOKEN" http://challenge.utctf.live:5926/admin
 ```
 The response contains the `admin` console and the **flag**:
-``
+```
 <!DOCTYPE html>
 <html>
 <head><title>FNSB SysAdmin Console</title></head>
