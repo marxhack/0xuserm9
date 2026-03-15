@@ -102,7 +102,7 @@ The crucial point: **RSA-OAEP** is an **asymmetric encryption scheme**. Anyone p
 With the session cookie, I tried accessing `/admin`:
 
 **The response** was:
-```js
+```json
 {"error":"Forbidden: admin subject required"}
 ```
 
@@ -143,7 +143,7 @@ OQIDAQAB
 
 Python script to encrypt a malicious payload using the server's own public key:
 
-```js
+```python
 from joserfc import jwe
 from joserfc.jwk import RSAKey
 from joserfc.jwe import JWERegistry
