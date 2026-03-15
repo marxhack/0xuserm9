@@ -18,8 +18,6 @@ author: 0xuserm9
 > **Description:** 
 "Let's just say that this bank isn't exactly following the latest trends in web design (or web security, for that matter). Just take a look at that website!"
 
-The challenge gave me a URL to a fictional 1997-era banking website for First National Savings Bank (FNSB) at challenge.utctf.live:5926. The goal was to find and exploit a vulnerability to retrieve the flag.
-
 > Author: Emmett (@emdawg25)
 
 ---
@@ -56,6 +54,7 @@ These credentials proved crucial for understanding the authentication flow.
 
 ## Step 3: Authentication Analysis
 Logging in as `testuser` revealed:
+
 **Request:**
 ```
 POST /login HTTP/1.1
