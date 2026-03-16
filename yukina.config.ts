@@ -44,7 +44,7 @@ const YukinaConfig: Configuration = {
     },
     {
       icon: "line-md:email",
-      link: "mailto:maroineyoucefi@gmail.com",
+      link: "",
     },
   ],
   maxSidebarCategoryChip: 6, // It is recommended to set it to a common multiple of 2 and 3
