@@ -31,8 +31,8 @@ const YukinaConfig: Configuration = {
   ],
 
   username: "Merouane Youcefi",
-  sign: "Security Researcher @HackerOne | CTF Player @XebecPwn3rs",
-  avatarUrl: "https://i.pinimg.com/1200x/0b/20/5e/0b205e4d88386fa700abcb007b20cfe1.jpg",
+  sign: "Security Researcher",
+  avatarUrl: "https://i.pinimg.com/736x/e1/55/8c/e1558ca1c8b46d4ba4abf7498781566e.jpg",
   socialLinks: [
     {
       icon: "line-md:linkedin",
