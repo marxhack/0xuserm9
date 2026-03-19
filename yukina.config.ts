@@ -26,7 +26,7 @@ const YukinaConfig: Configuration = {
     },
     {
       nameKey: I18nKeys.nav_bar_github,
-      href: "",
+      href: "https://medium.com/@0xuserm9",
     },
   ],
 
